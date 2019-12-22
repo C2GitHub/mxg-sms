@@ -14,7 +14,7 @@ let config = {
   // withCredentials: true, // Check cross-site Access-Control
 };
 
-export const _axios = axios.create(config);
+const _axios = axios.create(config);
 
 _axios.interceptors.request.use(
   function(config) {
@@ -58,4 +58,4 @@ Plugin.install = function(Vue) {
 
 Vue.use(Plugin);
 
-export default Plugin;
+export default _axios;
