@@ -2,7 +2,7 @@ import axios from "@/plugins/axios";
 
 export function login(username, password) {
   return axios({
-    url: process.env.VUE_APP_proxyPath + "/user/login",
+    url: "/user/login",
     method: "post",
     data: {
       username,
@@ -13,7 +13,17 @@ export function login(username, password) {
 
 export function getUserInfo(token) {
   return axios({
-    url: process.env.VUE_APP_proxyPath + "/user/info/" + token,
+    url: "/user/info/" + token,
     method: "get"
+  });
+}
+
+export function logout(token) {
+  return axios({
+    url: "/user/logout",
+    method: "post",
+    data: {
+      token
+    }
   });
 }

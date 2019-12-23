@@ -2,9 +2,7 @@
   <div id="layout">
     <top-header></top-header>
     <left-nav></left-nav>
-    <s-main>
-      <router-view />
-    </s-main>
+    <s-main></s-main>
   </div>
 </template>
 

@@ -7,7 +7,7 @@
     <div class="userInfo">
       <el-dropdown :hide-on-click="false" @command="handleCommand">
         <span class="el-dropdown-link">
-          下拉菜单
+          {{ username }}
           <i class="el-icon-arrow-down el-icon--right"></i>
         </span>
         <el-dropdown-menu slot="dropdown">
@@ -24,10 +24,45 @@
 </template>
 
 <script>
+import { logout } from "@/api/login";
 export default {
+  data() {
+    return {
+      username: ""
+    };
+  },
+  created() {
+    let userInfo = localStorage.getItem("msm-userInfo");
+    userInfo = userInfo ? userInfo : "[]";
+    const username = JSON.parse(userInfo).name;
+    this.username = username !== "undefined" ? username : "";
+  },
   methods: {
     handleCommand(command) {
-      this.$message("click on item " + command);
+      switch (command) {
+        case "edit":
+          break;
+        case "logout":
+          var token = localStorage.getItem("token");
+          logout(token).then(res => {
+            if (res.data.flag) {
+              // 退出成功
+              localStorage.removeItem("token");
+              localStorage.removeItem("msm-userInfo");
+              this.$router.push("/login");
+            } else {
+              // 退出失败
+              this.$message({
+                type: "error",
+                message: res.data.message,
+                duration: 1000
+              });
+            }
+          });
+          break;
+        default:
+          break;
+      }
     }
   }
 };

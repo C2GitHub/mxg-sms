@@ -1,11 +1,17 @@
 <template>
   <div class="main">
-    <slot></slot>
+    <app-link v-show="$route.path !== '/home'"></app-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {};
+import AppLink from "./appLink";
+export default {
+  components: {
+    AppLink
+  }
+};
 </script>
 
 <style lang="scss" scoped>

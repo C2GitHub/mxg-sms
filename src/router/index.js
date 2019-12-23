@@ -69,7 +69,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   // 首页登陆验证
-  if (to.path === "/") {
+  if (to.path !== "/login") {
     const token = localStorage.getItem("token");
     if (token) {
       next();
